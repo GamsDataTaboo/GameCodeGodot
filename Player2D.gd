@@ -21,15 +21,8 @@ func _process(_delta):
 func control_function_acceleration():
 	input_acceleration_multiplier = Vector2.ZERO
 	
-	if (Input.is_action_pressed("ui_up")):
-		input_acceleration_multiplier.y = -1
-	elif (Input.is_action_pressed("ui_down")):
-		input_acceleration_multiplier.y = 1
-		
-	if (Input.is_action_pressed("ui_left")):
-		input_acceleration_multiplier.x = -1
-	elif (Input.is_action_pressed("ui_right")):
-		input_acceleration_multiplier.x = 1
+	input_acceleration_multiplier = \
+		Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		
 	if(input_acceleration_multiplier.x != 0): 
 		is_accelerating[axis.X] = 1
@@ -43,15 +36,10 @@ func control_function_acceleration():
 func control_function_instant():
 	velocity *= 0
 	
-	if (Input.is_action_pressed("ui_up")):
-		velocity.y = -acceleration.y
-	elif (Input.is_action_pressed("ui_down")):
-		velocity.y = acceleration.y
-		
-	if (Input.is_action_pressed("ui_left")):
-		velocity.x = -acceleration.x
-	elif (Input.is_action_pressed("ui_right")):
-		velocity.x = acceleration.x
+	velocity = \
+		acceleration * \
+			Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+
 
 func get_player_input():
 	control_function.call_func()
