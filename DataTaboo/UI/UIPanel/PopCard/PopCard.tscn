@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://DataTaboo/UI/UIPanel/PopCard/PopCard.gd" type="Script" id=1]
+[ext_resource path="res://DataTaboo/DebugSprites/TestRectangle.png" type="Texture" id=2]
+[ext_resource path="res://Alpha/Themes/MainGameThemeLargeFont.tres" type="Theme" id=3]
+[ext_resource path="res://Alpha/Themes/MainGameTheme.tres" type="Theme" id=4]
+[ext_resource path="res://FreeFonts/rony-siswadi-architect-5-font/RonysiswadiArchitect5-1GErv.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 5 )
+
+[node name="PopCard" type="TextureRect"]
+anchor_left = 0.165104
+anchor_top = 0.175926
+anchor_right = 0.823958
+anchor_bottom = 0.784259
+texture = ExtResource( 2 )
+expand = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Title" type="Label" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.084585
+anchor_top = 0.108067
+anchor_right = 0.905139
+anchor_bottom = 0.38965
+theme = ExtResource( 3 )
+text = "Text"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Message" type="Label" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.0845848
+anchor_top = 0.406393
+anchor_right = 0.935178
+anchor_bottom = 0.853882
+theme = ExtResource( 4 )
+custom_fonts/font = SubResource( 1 )
+text = "More text."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.856126
+anchor_top = 0.817352
+anchor_right = 0.973913
+anchor_bottom = 0.954338
+theme = ExtResource( 4 )
+text = "Close"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Button" to="." method="start_shrink_and_close"]

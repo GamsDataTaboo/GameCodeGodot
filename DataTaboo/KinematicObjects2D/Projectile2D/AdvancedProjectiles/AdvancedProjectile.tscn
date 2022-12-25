@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://DataTaboo/KinematicObjects2D/Projectile2D/Projectile2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://DataTaboo/KinematicObjects2D/Projectile2D/AdvancedProjectiles/AdvancedProjectile.gd" type="Script" id=2]
+
+[node name="AdvancedProjectile" groups=["projectiles"] instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+velocity = Vector2( 0, 0 )
+max_velocity = Vector2( 0, 0 )
+distance_stop_buffer = 10000.0
+slow_object_on_hit = false
+boost_damage_over_time = false
+bounce_limit = 3
+grow_over_time = false
+explodes_on_impact = false
+explosion = null

@@ -1,8 +1,6 @@
 extends Control
 
 
-var item_grid
-
 # Configuration
 export (int)var size = 0
 export (PackedScene) var item_slot
@@ -10,12 +8,14 @@ var item_slots = []
 var space_left = 0
 #--
 
+var item_grid
+
 
 func _ready():
 	item_grid = $GridContainer
 
 func _process(_delta):
-	if(Input.is_action_just_released("inventory")):
+	if( Input.is_action_just_released("inventory") ):
 		if(visible):
 			hide()
 			for item in $GridContainer.get_children():
@@ -23,14 +23,15 @@ func _process(_delta):
 					if item.get_child(0).is_mouseover:
 						item.get_child(0)._on_Item_mouse_exited()
 						break
-		else: show()
+		else: 
+			show()
 
 
 # Item Slots
 func add_item_slots(new_slots):
-	for _i in range( new_slots ):
-		item_grid.add_child( item_slot.instance() )
-		item_slots.append( false )
+	for _i in range(new_slots):
+		item_grid.add_child(item_slot.instance())
+		item_slots.append(false)
 	space_left += new_slots
 	
 func add_item_to_slot(item):
@@ -43,13 +44,12 @@ func add_item_to_slot(item):
 			
 func send_item_data(_agent):
 	var items_to_send = []
+	
 	for i in range(item_slots.size()):
 		if item_slots[i]:
-			items_to_send.append(
-				[str(item_grid.get_child(i).get_child(0).id), 1] )
+			items_to_send.append([str(item_grid.get_child(i).get_child(0).id), 1])
 	
-	get_tree().get_nodes_in_group("http")[0]._on_Inventory_send_item_data(
-		items_to_send)
+	get_tree().get_nodes_in_group("http")[0]._on_Inventory_send_item_data(items_to_send)
 		
 func print_all_item_data(_agent):
 	for i in range(item_slots.size()):
@@ -59,5 +59,8 @@ func print_all_item_data(_agent):
 
 
 func _on_Inventory_Button_pressed():
-	if ! visible: show()
-	else: hide()
+	if !visible: 
+		show()
+		
+	else: 
+		hide()

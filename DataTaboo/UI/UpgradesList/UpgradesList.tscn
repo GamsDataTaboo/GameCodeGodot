@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://DataTaboo/UI/UpgradesList/UpgradesList.gd" type="Script" id=2]
+
+[node name="UpgradesList" type="ScrollContainer"]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.0281863
+anchor_top = 0.219512
+anchor_right = 0.975245
+anchor_bottom = 0.929756
+margin_right = 386.4
+margin_bottom = 145.6
+rect_scale = Vector2( 0.8, 0.8 )
+scroll_horizontal_enabled = false
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+populate_on_ready = false
+
+[node name="GridContainer" type="GridContainer" parent="."]
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+__meta__ = {
+"_edit_lock_": true
+}

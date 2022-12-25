@@ -22,11 +22,10 @@ func _ready():
 func _on_Item_mouse_entered():
 	active_tooltip.rect_position = get_local_mouse_position()
 	active_tooltip.rect_size = base_tooltip_size
-	tool_tip_layer.add_child(active_tooltip)
 	
+	tool_tip_layer.add_child(active_tooltip)
 	is_mouseover = true
 	
 func _on_Item_mouse_exited():
 	tool_tip_layer.remove_child(active_tooltip)
-	
 	is_mouseover = false

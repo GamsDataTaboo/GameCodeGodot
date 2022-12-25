@@ -1,10 +1,8 @@
 extends Area2D
 
 
-# Configuration
 var active = true
 export (String) var collector_group
-#--
 
 
 func on_collected():

@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://DataTaboo/UI/ListItems/ListItemTypeZero.tscn" type="PackedScene" id=1]
+[ext_resource path="res://DataTaboo/UI/UpgradesList/UpgradesList.tscn" type="PackedScene" id=2]
+[ext_resource path="res://DataTaboo/UI/UIPanel/UpgradesPanel/UpgradeDetails.gd" type="Script" id=3]
+[ext_resource path="res://DataTaboo/UI/UIPanel/UpgradesPanel/UpgradesPanel.gd" type="Script" id=4]
+
+[node name="UpgradesPanel" type="Panel"]
+self_modulate = Color( 0, 0.392157, 1, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+move_distance_on_activation = Vector2( 1920, 0 )
+move_distance_on_activation_speed = Vector2( -6000, 0 )
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -177.5
+margin_top = 73.0
+margin_right = 177.5
+margin_bottom = 91.0
+text = "Tower Shop"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="UpgradesList" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+margin_left = 290.0
+margin_top = -375.0
+margin_right = 2210.0
+margin_bottom = 912.0
+rect_scale = Vector2( 0.7, 0.7 )
+upgrade_list = [  ]
+upgrade_list_items_ui = [ ExtResource( 1 ) ]
+
+[node name="UpgradeDetails" type="Panel" parent="."]
+self_modulate = Color( 0, 0.505882, 1, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1920.0
+margin_right = 1946.0
+script = ExtResource( 3 )
+
+[node name="Upgrade" parent="UpgradeDetails" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.00648148
+anchor_right = 0.5
+anchor_bottom = 0.00648148
+margin_left = -768.0
+margin_top = 53.0
+margin_right = 1152.0
+margin_bottom = 410.0
+rect_scale = Vector2( 0.8, 0.8 )
+
+[node name="BuyButton" parent="UpgradeDetails/Upgrade" index="3"]
+visible = false
+
+[node name="ArrowButton" parent="UpgradeDetails/Upgrade" index="4"]
+visible = true
+
+[node name="SubUpgradesPanel" type="Panel" parent="UpgradeDetails"]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.105344
+anchor_top = 0.351852
+anchor_right = 0.900308
+anchor_bottom = 0.950741
+margin_right = 663.0
+margin_bottom = 277.2
+rect_scale = Vector2( 0.7, 0.7 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="SubUpgradesList" parent="UpgradeDetails/SubUpgradesPanel" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 146.0
+margin_top = 9.0
+margin_right = -194.0
+margin_bottom = -15.0
+rect_scale = Vector2( 1, 1 )
+upgrade_list = [  ]
+upgrade_list_items_ui = [ ExtResource( 1 ) ]
+
+[connection signal="list_item_arrow_button_pressed" from="UpgradesList" to="." method="start_move_from_activation"]
+[connection signal="list_item_arrow_button_pressed" from="UpgradesList" to="UpgradeDetails" method="_on_Categories_list_item_arrow_button_pressed"]
+[connection signal="pressed" from="UpgradeDetails/Upgrade/ArrowButton" to="." method="start_move_from_activation"]
+
+[editable path="UpgradeDetails/Upgrade"]

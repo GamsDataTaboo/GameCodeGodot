@@ -9,7 +9,9 @@ var base_screen_size
 #--
 
 # Configuration
-enum mode { RANDOM_OUTSIDE_FIELD_OF_VIEW }
+enum mode { 
+	RANDOM_OUTSIDE_FIELD_OF_VIEW 
+}
 export (mode) var spawn_mode = mode.RANDOM_OUTSIDE_FIELD_OF_VIEW
 var snap_function = null
 
@@ -29,10 +31,12 @@ func _ready():
 			randomize()
 			base_screen_size = OS.window_size * 0.5
 			aquire_target_from_tag()
-			snap_function = funcref(self, "snap_object_to_random_location_outside_field_of_view")
+			snap_function = "snap_object_to_random_location_outside_field_of_view"
+			
+	call(snap_function)
 
 func _process(_delta):
-	snap_function.call_func()
+	call(snap_function)
 
 
 func aquire_target_from_tag():
@@ -44,29 +48,51 @@ func aquire_target_from_tag():
 
 
 func snap_object_to_random_location_outside_field_of_view():
-	if(target == null): return
-	if global_position.distance_squared_to(target.position) < band_range: return
+	if(target == null): 
+		return
+		
+	if global_position.distance_squared_to(target.position) < band_range: 
+		return
 	
 	var snap_position = target.position
 	
 	var snap_distance_with_buffer = Vector2(
 		rand_range(0, screen_size_spawn_buffer.x) + base_screen_size.x,
-		rand_range(0, screen_size_spawn_buffer.y) + base_screen_size.y)
+		rand_range(0, screen_size_spawn_buffer.y) + base_screen_size.y
+	)
+	
 	var snap_distance = Vector2(
 		rand_range(0, base_screen_size.x),
-		rand_range(0, base_screen_size.y))
+		rand_range(0, base_screen_size.y)
+	)
 		
 	if rand_range(0, 1) <= 0.5:
-		if rand_range(0, 1) <= 0.5: snap_position.x -= snap_distance_with_buffer.x
-		else: snap_position.x += snap_distance_with_buffer.x
-			
-		if rand_range(0, 1) <= 0.5: snap_position.y -= snap_distance.y
-		else: snap_position.y += snap_distance.y
+		if rand_range(0, 1) <= 0.5: 
+			snap_position.x -= snap_distance_with_buffer.x
+		
+		else: 
+			snap_position.x += snap_distance_with_buffer.x
+		
+		
+		if rand_range(0, 1) <= 0.5: 
+			snap_position.y -= snap_distance.y
+		
+		else: 
+			snap_position.y += snap_distance.y
+	
+	
 	else:
-		if rand_range(0, 1) <= 0.5: snap_position.y -= snap_distance_with_buffer.y
-		else: snap_position.y += snap_distance_with_buffer.y
+		if rand_range(0, 1) <= 0.5: 
+			snap_position.y -= snap_distance_with_buffer.y
+		
+		else: 
+			snap_position.y += snap_distance_with_buffer.y
 			
-		if rand_range(0, 1) <= 0.5: snap_position.x -= snap_distance.x
-		else: snap_position.x += snap_distance.x
+			
+		if rand_range(0, 1) <= 0.5: 
+			snap_position.x -= snap_distance.x
+		
+		else: 
+			snap_position.x += snap_distance.x
 	
 	emit_signal("snap", snap_position)
